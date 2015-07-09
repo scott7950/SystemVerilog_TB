@@ -1,0 +1,24 @@
+`ifndef __PACKET_INTERFACE_SVI__
+`define __PACKET_INTERFACE_SVI__
+interface packet_interface (input logic clk);
+
+logic       rst_n  ;
+logic [7:0] rxd    ;
+logic       rx_vld ;
+logic [7:0] txd    ;
+logic       tx_vld ;
+
+clocking cb @(posedge clk);
+    default input #1 output #1;
+    output rst_n  ;
+    output txd    ;
+    output tx_vld ;
+    input  rxd    ;
+    input  rx_vld ;
+endclocking
+
+modport master(clocking cb, output rst_n);
+
+endinterface
+`endif
+

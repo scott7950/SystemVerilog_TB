@@ -1,0 +1,23 @@
+`ifndef __CPU_INTERFACE_SVI__
+`define __CPU_INTERFACE_SVI__
+interface cpu_interface (input logic clk);
+
+logic        rst_n ;
+logic [7:0 ] addr  ;
+logic [31:0] din   ;
+logic        rw    ;
+logic [31:0] dout  ;
+
+clocking cb @(posedge clk);
+    default input #1 output #1;
+    output addr ;
+    output rw   ;
+    output dout ;
+    input  din  ;
+endclocking
+
+modport master(clocking cb, output rst_n);
+
+endinterface
+`endif
+
